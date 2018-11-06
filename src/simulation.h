@@ -3,7 +3,7 @@
 class Network;
 
 /*!
-  This is the top-level class, building all the objects and running the simulation, based on user-defined parameters.
+  This is the top-level class, buailding all the objects and running the simulation, based on user-defined parameters.
   The dynamics is a discrete stochastic heat equation on the graph: each node in the network is initialized 
   with a random value and these values then diffuse across the links.
   At each time-step random diffusion coefficients are drawn for each node.  

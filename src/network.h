@@ -1,5 +1,7 @@
 #include <map>
 #include <vector>
+#include "random.h"
+#include <iostream>
 
 /*!
   This is a network of nodes with bidirectional links: if <b>(a, b)</b> is a link then <b>(b, a)</b> is also a link.
@@ -13,33 +15,49 @@ public:
     Network() {}
 
 /*! Resizes the list of nodes (\ref values) */
-    void resize(const size_t&);
+    void resize(const size_t& node);
+
+
 /*! Adds a bidirectional link between two nodes
   @param[in] a,b the indexes if the two nodes 
   @param[out] success the link was succesfully inserted
  */
-    bool add_link(const size_t&, const size_t&);
+    bool add_link(const size_t&, const size_t& b);
+
+
 /*! Creates random connections between nodes: each node *n* will be linked with *degree(n)* other nodes (randomly chosen) where *degree(n)* is Poisson-distributed.
 
-  All previous links are cleared first.
+  All previous links are erased first.
   @param mean_deg the average of the Poisson distribution.
  */
-    size_t random_connect(const double&);
+    size_t random_connect(const double& mean);
+
+
 /*! Resets all node values.
   @param[in] vector of new node values
   @param[out] number of nodes succesfully reset
  */
-    size_t set_values(const std::vector<double>&);
+    size_t set_values(const std::vector<double>& new_values);
+
+
 /*! Number of nodes */
     size_t size() const;
+
+
 /*! Degree (number of links) of node no *n* */
     size_t degree(const size_t &_n) const;
+
+
 /*! Value of node no *n* */
     double value(const size_t &_n) const;
-/*! All node values in descending order */
+
+
+/*! All node values in descending order, \ref values is left unchanged by this operation.*/
     std::vector<double> sorted_values() const;
+
+
 /*! All neighbors (linked) nodes of node no *n* */
-    std::vector<size_t> neighbors(const size_t&) const;
+    std::vector<size_t> neighbors(const size_t&_n) const;
 
 private:
     std::vector<double> values;
